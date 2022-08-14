@@ -7,7 +7,7 @@ request.onupgradeneeded = function(event) {
     db.createObjectStore('new_pizza', { autoIncrement: true });
   };
 
-  
+
 request.onsuccess = function(event) {
     
     db = event.target.result;
@@ -23,3 +23,14 @@ request.onsuccess = function(event) {
     
     console.log(event.target.errorCode);
   };
+
+  function saveRecord(record) {
+    
+    const transaction = db.transaction(['new_pizza'], 'readwrite');
+  
+    
+    const pizzaObjectStore = transaction.objectStore('new_pizza');
+  
+    
+    pizzaObjectStore.add(record);
+  }
